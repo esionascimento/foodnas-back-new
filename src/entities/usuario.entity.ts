@@ -1,14 +1,14 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Produto } from './produto.entity';
-import { Fornecedor } from './fornecedor.entity';
+import { Fornecedor } from './fornecedores.entity';
 import { Lote } from './lote.entity';
 import { Preco } from './preco.entity';
 import { Estoque } from './estoque.entity';
-import { Venda } from './venda.entity';
-import { Compra } from './compra.entity';
-import { Orcamento } from './orcamento.entity';
+import { Venda } from './vendas.entity';
+import { Compra } from './compras.entity';
+import { Orcamento } from './orcamentos.entity';
 import { BaseEntity } from './base.entity';
-import { ItensCompra } from './compra-item.entity';
+import { ItensCompra } from './itens_compra.entity';
 
 @Entity()
 export class Usuario extends BaseEntity {
