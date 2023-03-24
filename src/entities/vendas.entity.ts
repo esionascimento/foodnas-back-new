@@ -14,11 +14,14 @@ export class Venda extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column('datetime')
   data_venda: Date;
 
-  @Column()
+  @Column('decimal', { precision: 10, scale: 2 })
   valor_total: number;
+
+  @Column({type: 'enum', enum: ['PENDENTE', 'CONCLUIDA', 'CANCELADA']})
+  status: string;
 
   @ManyToOne((type) => Usuario, (usuario) => usuario.vendas)
   usuario: Usuario;
