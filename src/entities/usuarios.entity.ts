@@ -1,8 +1,8 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Produto } from './produto.entity';
-import { Fornecedor } from './fornecedores.entity';
+import { Produto } from './produtos.entity';
+import { Fornecedores } from './fornecedores.entity';
 import { Lote } from './lote.entity';
-import { Preco } from './preco.entity';
+import { Preco } from './precos.entity';
 import { Estoque } from './estoque.entity';
 import { Venda } from './vendas.entity';
 import { Compra } from './compras.entity';
@@ -27,8 +27,8 @@ export class Usuario extends BaseEntity {
   @OneToMany(() => Produto, (produto) => produto.usuario)
   produtos: Produto[];
 
-  @OneToMany(() => Fornecedor, (fornecedor) => fornecedor.usuario)
-  fornecedores: Fornecedor[];
+  @OneToMany(() => Fornecedores, (fornecedor) => fornecedor.usuario)
+  fornecedores: Fornecedores[];
 
   @OneToMany(() => Lote, (lote) => lote.usuario)
   lotes: Lote[];
