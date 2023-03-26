@@ -4,9 +4,10 @@ import {
   Column,
   ManyToOne,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
-import { Usuario } from './usuario.entity';
-import { VendaItem } from './venda-item.entity';
+import { Usuario } from './usuarios.entity';
+import { VendaItem } from './itens_venda.entity';
 import { BaseEntity } from './base.entity';
 
 @Entity()
@@ -20,12 +21,13 @@ export class Venda extends BaseEntity {
   @Column('decimal', { precision: 10, scale: 2 })
   valor_total: number;
 
-  @Column({type: 'enum', enum: ['PENDENTE', 'CONCLUIDA', 'CANCELADA']})
+  @Column({ type: 'enum', enum: ['PENDENTE', 'CONCLUIDA', 'CANCELADA'] })
   status: string;
-
-  @ManyToOne((type) => Usuario, (usuario) => usuario.vendas)
-  usuario: Usuario;
 
   @OneToMany((type) => VendaItem, (vendaItem) => vendaItem.venda)
   itens: VendaItem[];
+
+  @ManyToOne((type) => Usuario, (usuario) => usuario.vendas)
+  @JoinColumn({ name: 'id_usuario' })
+  usuario: Usuario;
 }
