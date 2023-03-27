@@ -16,14 +16,14 @@ export class Preco extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  data_semana: Date;
+  @Column({ name: 'data_semana' })
+  dataSemana: Date;
 
-  @Column()
-  preco_compra: number;
+  @Column({ name: 'preco_compra' })
+  precoCompra: number;
 
-  @Column()
-  preco_venda: number;
+  @Column({ name: 'preco_venda' })
+  precoVenda: number;
 
   @ManyToOne(() => Produto)
   @JoinColumn({ name: 'id_produto' })
