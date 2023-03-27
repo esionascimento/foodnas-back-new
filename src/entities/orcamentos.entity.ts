@@ -1,27 +1,29 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
-  PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Usuario } from './usuario.entity';
+import { Usuario } from './usuarios.entity';
 import { BaseEntity } from './base.entity';
+import { EStatus, TStatusRoleType } from './enum';
 
 @Entity()
-export class Orcamento  extends BaseEntity  {
+export class Orcamento extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({type: 'enum', enum: ['PENDENTE', 'CONCLUIDA', 'CANCELADA']})
-  status: string;
-  
+  @Column({ type: 'enum', enum: EStatus })
+  status: TStatusRoleType;
+
   @Column('datetime', { name: 'data_orcamento' })
   dataOrcamento: Date;
-  
+
   @Column('decimal', { name: 'valor_total', precision: 10, scale: 2 })
   valorTotal: string;
 
-  @ManyToOne(() => Usuario, { eager: true })
+  @ManyToOne(() => Usuario)
+  @JoinColumn({ name: 'id_usuario' })
   usuario: Usuario;
 }
