@@ -2,20 +2,20 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColum
 import { Usuario } from './usuarios.entity';
 import { Fornecedores } from './fornecedores.entity';
 import { Lote } from './lote.entity';
-import { VendaItem } from './itens_venda.entity';
+import { BaseEntity } from './base.entity';
 
 @Entity()
-export class Produto {
+export class Produto extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column('varchar', { length: 50 })
   nome: string;
 
   @Column({ type: 'text', nullable: true })
   descricao: string;
 
-  @Column()
+  @Column('varchar', { length: 20 })
   unidade: string;
 
   @ManyToOne(() => Fornecedores, fornecedores => fornecedores.produtos)
@@ -24,7 +24,7 @@ export class Produto {
   @OneToMany(() => Lote, lote => lote.produto)
   lotes: Lote[];
 
-  @ManyToOne(() => Usuario, usuario => usuario.produtos, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Usuario, usuario => usuario.produtos)
   @JoinColumn({ name: 'id_usuario' })
   usuario: Usuario;
 
