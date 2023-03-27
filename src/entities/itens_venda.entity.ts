@@ -1,7 +1,6 @@
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Venda } from './vendas.entity';
 import { Lote } from './lote.entity';
-import { Usuario } from './usuarios.entity';
 
 @Entity()
 export class VendaItem extends BaseEntity {
