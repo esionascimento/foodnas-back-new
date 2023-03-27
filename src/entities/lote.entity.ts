@@ -1,8 +1,15 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
-import { Produto } from './produto.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
+import { Produto } from './produtos.entity';
 import { BaseEntity } from './base.entity';
-import { Usuario } from './usuario.entity';
-import { Preco } from './preco.entity';
+import { Usuario } from './usuarios.entity';
+import { Preco } from './precos.entity';
 import { Estoque } from './estoque.entity';
 import { ItensCompra } from './itens_compra.entity';
 
@@ -11,27 +18,29 @@ export class Lote extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column('varchar', { name: 'numero_lote', length: 20 })
   numeroLote: string;
 
-  @Column()
+  @Column('datetime', { name: 'data_validade' })
   dataValidade: Date;
 
-  @Column()
+  @Column('integer')
   quantidade: number;
 
-  @ManyToOne(() => Produto, produto => produto.lotes)
+  @ManyToOne(() => Produto, (produto) => produto.lotes)
+  @JoinColumn({ name: 'id_produto' })
   produto: Produto;
 
-  @ManyToOne(() => Usuario, user => user.lotes)
+  @ManyToOne(() => Usuario, (user) => user.lotes)
+  @JoinColumn({ name: 'id_usuario' })
   usuario: Usuario;
 
-  @OneToMany(() => Preco, preco => preco.lote)
+  @OneToMany(() => Preco, (preco) => preco.lote)
   precos: Preco[];
 
-  @OneToMany(() => Estoque, estoque => estoque.lote)
+  @OneToMany(() => Estoque, (estoque) => estoque.lote)
   estoques: Estoque[];
 
-  @OneToMany(type => ItensCompra, itensCompra => itensCompra.lote)
+  @OneToMany((type) => ItensCompra, (itensCompra) => itensCompra.lote)
   itensCompra: ItensCompra[];
 }
