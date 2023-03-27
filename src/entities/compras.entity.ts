@@ -8,9 +8,10 @@ import {
 } from 'typeorm';
 import { Usuario } from './usuarios.entity';
 import { ItensCompra } from './itens_compra.entity';
+import { BaseEntity } from './base.entity';
 
 @Entity()
-export class Compra {
+export class Compras  extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
