@@ -1,22 +1,31 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
 import { BaseEntity } from './base.entity';
-import { Usuario } from './usuario.entity';
-import { Produto } from './produto.entity';
+import { Usuario } from './usuarios.entity';
+import { Produto } from './produtos.entity';
 
 @Entity()
-export class Fornecedor  extends BaseEntity {
+export class Fornecedores extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column('varchar', { unique: true, length: 50 })
   nome: string;
 
-  @Column()
+  @Column('varchar', { length: 100 })
   endereco: string;
 
-  @ManyToOne(() => Usuario, usuario => usuario.fornecedores)
-  usuario: Usuario;
-
-  @OneToMany(() => Produto, produto => produto.fornecedores)
+  @OneToMany(() => Produto, (produto) => produto.fornecedores)
+  @JoinColumn({ name: 'id_usuario' })
   produtos: Produto[];
+
+  @ManyToOne(() => Usuario, (usuario) => usuario.fornecedores)
+  @JoinColumn({ name: 'id_usuario' })
+  usuario: Usuario;
 }
