@@ -5,23 +5,22 @@ import { Lote } from './lote.entity';
 import { Preco } from './precos.entity';
 import { Estoque } from './estoque.entity';
 import { Venda } from './vendas.entity';
-import { Compra } from './compras.entity';
+import { Compras } from './compras.entity';
 import { Orcamento } from './orcamentos.entity';
 import { BaseEntity } from './base.entity';
-import { ItensCompra } from './itens_compra.entity';
 
 @Entity()
 export class Usuario extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column('varchar', { length: 50 })
   nome: string;
 
-  @Column()
+  @Column('varchar', { length: 255 })
   email: string;
 
-  @Column()
+  @Column('varchar', { length: 255 })
   senha: string;
 
   @OneToMany(() => Produto, (produto) => produto.usuario)
@@ -42,12 +41,9 @@ export class Usuario extends BaseEntity {
   @OneToMany(() => Venda, (venda) => venda.usuario)
   vendas: Venda[];
 
-  @OneToMany(() => Compra, (compra) => compra.usuario)
-  compras: Compra[];
+  @OneToMany(() => Compras, (compra) => compra.usuario)
+  compras: Compras[];
 
   @OneToMany(() => Orcamento, (orcamento) => orcamento.usuario)
   orcamentos: Orcamento[];
-
-  @OneToMany(type => ItensCompra, itensCompra => itensCompra.usuario)
-  itensCompra: ItensCompra[];
 }
