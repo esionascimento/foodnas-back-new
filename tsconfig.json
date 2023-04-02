@@ -9,13 +9,21 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    // "rootDir": "./src",
+    "baseUrl": ".",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@db/*": ["./src/db/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@graphql/*": ["./src/graphql/*"],
+      "@modules/*": ["./src/modules/*"]
+    }
   }
 }
