@@ -59,7 +59,7 @@
     "ts-jest": "29.0.3",
     "ts-loader": "^9.2.3",
     "ts-node": "^10.9.1",
-    "tsconfig-paths": "4.1.1",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^4.7.4"
   },
   "jest": {
@@ -77,6 +77,10 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/../src/$1",
+      "^@modules/(.*)$": "<rootDir>/../src/modules/$1"
+    }
   }
 }
