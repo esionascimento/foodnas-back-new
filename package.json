@@ -21,7 +21,8 @@
     "typeorm": "npm run build && npx typeorm -d dist/db/data-source.js",
     "migration:generate": "npm run typeorm -- migration:generate",
     "migration:run": "npm run typeorm -- migration:run",
-    "migration:revert": "npm run typeorm -- migration:revert"
+    "migration:revert": "npm run typeorm -- migration:revert",
+    "migration:create": "cross-var ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli migration:create ./src/database/migrations/$npm_config_name"
   },
   "dependencies": {
     "@apollo/server": "^4.5.0",
@@ -34,6 +35,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
     "class-validator": "^0.14.0",
+    "cross-var": "^1.1.0",
     "graphql": "^16.6.0",
     "mysql2": "^3.2.0",
     "reflect-metadata": "^0.1.13",
