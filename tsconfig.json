@@ -20,7 +20,7 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@/*": ["./src/*"],
-      "@db/*": ["./src/db/*"],
+      "@db/*": ["src/database/*"],
       "@entities/*": ["./src/entities/*"],
       "@graphql/*": ["./src/graphql/*"],
       "@modules/*": ["./src/modules/*"]
