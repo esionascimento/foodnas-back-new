@@ -9,7 +9,7 @@ npm run migration:create --name=Lote
 ```
 yarn run migration:generate src/db/migrations/lote
 ```
-
+- windows
 ```
-yarn run migration:generate src\db\migrations\lote
+npm run migration:generate:win --name=Lote
 ```
