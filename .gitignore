@@ -7,7 +7,7 @@ yarn.lock
 package-lock.json
 .env
 .vscode
-/src/db/migrations/*
+/src/database/migrations/*
 schema.gql
 
 # Logs
