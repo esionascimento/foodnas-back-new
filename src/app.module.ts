@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from './modules/usuarios/users.module';
+import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -19,8 +19,8 @@ import { dataSourceOptions } from './database/ormconfig';
       autoSchemaFile: true,
     }),
     TypeOrmModule.forRoot(dataSourceOptions),
-    UsersModule,
     AuthModule,
+    UsuariosModule,
   ],
   controllers: [],
   providers: [UserResolver],
