@@ -10,7 +10,7 @@ import { Orcamento } from './orcamentos.entity';
 import { BaseEntity } from './base.entity';
 
 @Entity()
-export class Usuario extends BaseEntity {
+export class Usuarios extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
