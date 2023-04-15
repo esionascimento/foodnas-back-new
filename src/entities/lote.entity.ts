@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { Produto } from './produtos.entity';
 import { BaseEntity } from './base.entity';
-import { Usuario } from './usuarios.entity';
+import { Usuarios } from './usuarios.entity';
 import { Preco } from './precos.entity';
 import { Estoque } from './estoque.entity';
 import { ItensCompra } from './itens_compra.entity';
@@ -31,9 +31,9 @@ export class Lote extends BaseEntity {
   @JoinColumn({ name: 'id_produto' })
   produto: Produto;
 
-  @ManyToOne(() => Usuario, (user) => user.lotes)
+  @ManyToOne(() => Usuarios, (user) => user.lotes)
   @JoinColumn({ name: 'id_usuario' })
-  usuario: Usuario;
+  usuario: Usuarios;
 
   @OneToMany(() => Preco, (preco) => preco.lote)
   precos: Preco[];
