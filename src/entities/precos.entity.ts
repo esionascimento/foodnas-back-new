@@ -9,7 +9,7 @@ import { BaseEntity } from './base.entity';
 import { Produto } from './produtos.entity';
 import { Fornecedores } from './fornecedores.entity';
 import { Lote } from './lote.entity';
-import { Usuario } from './usuarios.entity';
+import { Usuarios } from './usuarios.entity';
 
 @Entity()
 export class Preco extends BaseEntity {
@@ -37,7 +37,7 @@ export class Preco extends BaseEntity {
   @JoinColumn({ name: 'id_lote' })
   lote: Lote;
 
-  @ManyToOne(() => Usuario)
+  @ManyToOne(() => Usuarios)
   @JoinColumn({ name: 'id_usuario' })
-  usuario: Usuario;
+  usuario: Usuarios;
 }
