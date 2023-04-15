@@ -6,7 +6,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
-import { Usuario } from './usuarios.entity';
+import { Usuarios } from './usuarios.entity';
 import { Lote } from './lote.entity';
 
 @Entity()
@@ -27,7 +27,7 @@ export class MovimentacoesEstoque extends BaseEntity {
   @JoinColumn({ name: 'id_lote' })
   lote: Lote;
 
-  @ManyToOne(() => Usuario, (usuario) => usuario.fornecedores)
+  @ManyToOne(() => Usuarios, (usuario) => usuario.fornecedores)
   @JoinColumn({ name: 'id_usuario' })
-  usuario: Usuario;
+  usuario: Usuarios;
 }
