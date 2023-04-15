@@ -12,7 +12,7 @@ import { Usuario } from './usuarios.entity';
 import { VendaItem } from './itens_venda.entity';
 import { BaseEntity } from './base.entity';
 import { EStatus, TStatusRoleType } from './enum';
-import { MeioPagamentos } from './meios_pagamentos.entity';
+import { MeiosPagamento } from './meios_pagamentos.entity';
 
 @Entity()
 export class Venda extends BaseEntity {
@@ -35,7 +35,7 @@ export class Venda extends BaseEntity {
   @JoinColumn({ name: 'id_usuario' })
   usuario: Usuario;
 
-  @ManyToMany(() => MeioPagamentos, (meioPagamento) => meioPagamento.vendas)
+  @ManyToMany(() => MeiosPagamento, (meioPagamento) => meioPagamento.vendas)
   @JoinTable({
     name: 'vendas_meios_pagamento',
     joinColumn: {
@@ -43,9 +43,9 @@ export class Venda extends BaseEntity {
       referencedColumnName: 'id',
     },
     inverseJoinColumn: {
-      name: 'id_meio_pagamento',
+      name: 'id_meios_pagamento',
       referencedColumnName: 'id',
     },
   })
-  meiosPagamento: MeioPagamentos[];
+  meiosPagamento: MeiosPagamento[];
 }

@@ -6,12 +6,12 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { Usuario } from './usuarios.entity';
+import { Usuarios } from './usuarios.entity';
 import { ItensCompra } from './itens_compra.entity';
 import { BaseEntity } from './base.entity';
 
 @Entity()
-export class Compras  extends BaseEntity {
+export class Compras extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -27,7 +27,7 @@ export class Compras  extends BaseEntity {
   @OneToMany((type) => ItensCompra, (itensCompra) => itensCompra.compra)
   itensCompra: ItensCompra[];
 
-  @ManyToOne(() => Usuario)
+  @ManyToOne(() => Usuarios)
   @JoinColumn({ name: 'id_usuario' })
-  usuario: Usuario;
+  usuario: Usuarios;
 }

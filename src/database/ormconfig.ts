@@ -1,7 +1,6 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
-import 'dotenv/config';
 import entities from '@/entities';
-const path = require('path');
+import 'dotenv/config';
 
 export const dataSourceOptions: DataSourceOptions = {
   url: process.env.DATABASE_URL,
@@ -12,9 +11,7 @@ export const dataSourceOptions: DataSourceOptions = {
   // password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_DATABASE,
   entities: entities,
-  migrations: [
-    'dist/database/migrations/*{.ts,.js}'
-  ],
+  migrations: ['dist/database/migrations/*{.ts,.js}'],
   synchronize: false,
   logging: true,
   extra: {

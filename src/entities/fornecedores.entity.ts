@@ -7,17 +7,22 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
-import { Usuario } from './usuarios.entity';
+import { Usuarios } from './usuarios.entity';
 import { Produto } from './produtos.entity';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 
+@ObjectType()
 @Entity()
 export class Fornecedores extends BaseEntity {
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field()
   @Column('varchar', { unique: true, length: 50 })
   nome: string;
 
+  @Field()
   @Column('varchar', { length: 100 })
   endereco: string;
 
@@ -25,7 +30,7 @@ export class Fornecedores extends BaseEntity {
   @JoinColumn({ name: 'id_usuario' })
   produtos: Produto[];
 
-  @ManyToOne(() => Usuario, (usuario) => usuario.fornecedores)
+  @ManyToOne(() => Usuarios, (usuario) => usuario.fornecedores)
   @JoinColumn({ name: 'id_usuario' })
-  usuario: Usuario;
+  usuario: Usuarios;
 }
