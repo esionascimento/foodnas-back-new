@@ -1,9 +1,9 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
-import { Venda } from "./vendas.entity";
-import { MeioPagamentos } from "./meios_pagamentos.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Venda } from './vendas.entity';
+import { MeiosPagamento } from './meios_pagamentos.entity';
 
 @Entity()
-export class VendasMeioPagamentos {
+export class VendasMeioPagamento {
   // @Column({ name: 'id_venda', type: 'int', primary: true })
   // idVenda: number;
 
@@ -23,7 +23,7 @@ export class VendasMeioPagamentos {
   @PrimaryColumn()
   public meioPagamentoId: string;
 
-  @ManyToOne(() => MeioPagamentos, (meioPagamento) => meioPagamento.vendas)
-  @JoinColumn({ name: 'id_meio_pagamento' })
-  meioPagamento: MeioPagamentos;
+  @ManyToOne(() => MeiosPagamento, (meioPagamento) => meioPagamento.vendas)
+  @JoinColumn({ name: 'id_meios_pagamento' })
+  meiosPagamento: MeiosPagamento;
 }
