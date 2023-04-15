@@ -1,5 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
-import { Usuario } from './usuarios.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
+import { Usuarios } from './usuarios.entity';
 import { Fornecedores } from './fornecedores.entity';
 import { Lote } from './lote.entity';
 import { BaseEntity } from './base.entity';
@@ -18,15 +25,15 @@ export class Produto extends BaseEntity {
   @Column('varchar', { length: 20 })
   unidade: string;
 
-  @ManyToOne(() => Fornecedores, fornecedores => fornecedores.produtos)
+  @ManyToOne(() => Fornecedores, (fornecedores) => fornecedores.produtos)
   fornecedores: Fornecedores;
-  
-  @OneToMany(() => Lote, lote => lote.produto)
+
+  @OneToMany(() => Lote, (lote) => lote.produto)
   lotes: Lote[];
 
-  @ManyToOne(() => Usuario, usuario => usuario.produtos)
+  @ManyToOne(() => Usuarios, (usuario) => usuario.produtos)
   @JoinColumn({ name: 'id_usuario' })
-  usuario: Usuario;
+  usuario: Usuarios;
 
   // @OneToMany(() => ItemVenda, itemVenda => itemVenda.produto)
   // itensVenda: VendaItem[];
