@@ -9,8 +9,8 @@ export class UserResolver {
     return 'Hello';
   }
 
-  @Mutation(() => UserObject)
-  createOneUser(@Args() args: CreateOneUserArgs) {
-    return args.data;
-  }
+  // @Mutation(() => UserObject)
+  // createOneUser(@Args() args: CreateOneUserArgs) {
+  //   return args.data;
+  // }
 }
