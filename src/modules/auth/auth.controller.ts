@@ -2,7 +2,7 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
-import { Usuario } from 'src/entities/usuarios.entity';
+import { Usuarios } from 'src/entities/usuarios.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -12,7 +12,7 @@ export class AuthController {
   async createUser(
     @Body('password') password: string,
     @Body('username') username: string,
-  ): Promise<Usuario> {
+  ): Promise<Usuarios> {
     // const hashedPassword = await bcrypt.hash(password, saltOrRounds);
     // const result = await this.usersService.createUser(
     //     username,
