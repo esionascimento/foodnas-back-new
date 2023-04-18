@@ -8,7 +8,7 @@ import {
   ManyToMany,
   JoinTable,
 } from 'typeorm';
-import { Usuario } from './usuarios.entity';
+import { Usuarios } from './usuarios.entity';
 import { VendaItem } from './itens_venda.entity';
 import { BaseEntity } from './base.entity';
 import { EStatus, TStatusRoleType } from './enum';
@@ -31,9 +31,9 @@ export class Venda extends BaseEntity {
   @OneToMany((type) => VendaItem, (vendaItem) => vendaItem.venda)
   itens: VendaItem[];
 
-  @ManyToOne((type) => Usuario, (usuario) => usuario.vendas)
+  @ManyToOne((type) => Usuarios, (usuario) => usuario.vendas)
   @JoinColumn({ name: 'id_usuario' })
-  usuario: Usuario;
+  usuario: Usuarios;
 
   @ManyToMany(() => MeiosPagamento, (meioPagamento) => meioPagamento.vendas)
   @JoinTable({
