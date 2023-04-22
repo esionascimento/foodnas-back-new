@@ -8,18 +8,23 @@ import { Venda } from './vendas.entity';
 import { Compras } from './compras.entity';
 import { Orcamento } from './orcamentos.entity';
 import { BaseEntity } from './base.entity';
+import { Field, ObjectType } from '@nestjs/graphql';
 
+@ObjectType()
 @Entity()
 export class Usuarios extends BaseEntity {
+  @Field()
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field()
   @Column('varchar', { length: 50 })
   nome: string;
 
   @Column('varchar', { length: 255 })
   email: string;
 
+  @Field()
   @Column('varchar', { length: 255 })
   senha: string;
 
