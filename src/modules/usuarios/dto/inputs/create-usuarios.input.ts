@@ -1,13 +1,13 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { MaxLength, MinLength } from 'class-validator';
 
 @InputType()
 export class CreateUsuariosInput {
   @Field()
-  @MinLength(3, { message: "Nome minimo 3 letras"})
+  @MinLength(3, { message: 'Nome minimo 3 letras' })
   @MaxLength(255)
   nome: string;
-  
+
   @Field()
   @MaxLength(255)
   email: string;
@@ -16,4 +16,13 @@ export class CreateUsuariosInput {
   @MinLength(8)
   @MaxLength(255)
   senha: string;
+}
+
+@ObjectType()
+export class CreateUsuariosResponse {
+  @Field()
+  nome: string;
+
+  @Field()
+  email: string;
 }
