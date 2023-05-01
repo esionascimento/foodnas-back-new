@@ -8,8 +8,8 @@ import {
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { Usuarios } from './usuarios.entity';
-import { Produto } from './produtos.entity';
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Produtos } from './produtos.entity';
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 @Entity()
@@ -26,11 +26,17 @@ export class Fornecedores extends BaseEntity {
   @Column('varchar', { length: 100 })
   endereco: string;
 
-  @OneToMany(() => Produto, (produto) => produto.fornecedores)
+  @OneToMany(() => Produtos, (produto) => produto.fornecedores)
   @JoinColumn({ name: 'id_usuario' })
-  produtos: Produto[];
+  produtos: Produtos[];
 
-  @ManyToOne(() => Usuarios, (usuario) => usuario.fornecedores)
-  @JoinColumn({ name: 'id_usuario' })
+  @Field(() => Int)
+  @Column({ name: 'id_usuario' })
+  usuarioId: number;
+
+  @ManyToOne(() => Usuarios, (usuario) => usuario.id, {
+    nullable: false,
+  })
+  @JoinColumn({ name: 'id_usuario', referencedColumnName: 'id' })
   usuario: Usuarios;
 }

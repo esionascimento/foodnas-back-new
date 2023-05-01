@@ -8,11 +8,11 @@ import {
 } from 'typeorm';
 import { Usuarios } from './usuarios.entity';
 import { Fornecedores } from './fornecedores.entity';
-import { Lote } from './lote.entity';
+import { Lotes } from './lote.entity';
 import { BaseEntity } from './base.entity';
 
 @Entity()
-export class Produto extends BaseEntity {
+export class Produtos extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -28,8 +28,8 @@ export class Produto extends BaseEntity {
   @ManyToOne(() => Fornecedores, (fornecedores) => fornecedores.produtos)
   fornecedores: Fornecedores;
 
-  @OneToMany(() => Lote, (lote) => lote.produto)
-  lotes: Lote[];
+  @OneToMany(() => Lotes, (lote) => lote.produto)
+  lotes: Lotes[];
 
   @ManyToOne(() => Usuarios, (usuario) => usuario.produtos)
   @JoinColumn({ name: 'id_usuario' })

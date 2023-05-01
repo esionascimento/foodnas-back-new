@@ -6,7 +6,7 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { Produto } from './produtos.entity';
+import { Produtos } from './produtos.entity';
 import { BaseEntity } from './base.entity';
 import { Usuarios } from './usuarios.entity';
 import { Preco } from './precos.entity';
@@ -14,7 +14,7 @@ import { Estoque } from './estoque.entity';
 import { ItensCompra } from './itens_compra.entity';
 
 @Entity()
-export class Lote extends BaseEntity {
+export class Lotes extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -27,9 +27,9 @@ export class Lote extends BaseEntity {
   @Column('integer')
   quantidade: number;
 
-  @ManyToOne(() => Produto, (produto) => produto.lotes)
+  @ManyToOne(() => Produtos, (produto) => produto.lotes)
   @JoinColumn({ name: 'id_produto' })
-  produto: Produto;
+  produto: Produtos;
 
   @ManyToOne(() => Usuarios, (user) => user.lotes)
   @JoinColumn({ name: 'id_usuario' })
