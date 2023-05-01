@@ -4,6 +4,6 @@ export abstract class BaseEntity {
   @CreateDateColumn()
   criadoEm: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ nullable: true })
   atualizadoEm: Date;
 }
