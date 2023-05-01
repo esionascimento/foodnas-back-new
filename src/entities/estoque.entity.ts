@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { Usuarios } from './usuarios.entity';
-import { Lote } from './lote.entity';
+import { Lotes } from './lote.entity';
 
 @Entity()
 export class Estoque extends BaseEntity {
@@ -17,9 +17,9 @@ export class Estoque extends BaseEntity {
   @Column('integer')
   quantidade: number;
 
-  @ManyToOne(() => Lote)
+  @ManyToOne(() => Lotes)
   @JoinColumn({ name: 'id_lote' })
-  lote: Lote;
+  lote: Lotes;
 
   @ManyToOne(() => Usuarios)
   @JoinColumn({ name: 'id_usuario' })
