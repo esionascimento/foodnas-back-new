@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Orcamento } from './orcamentos.entity';
-import { Produto } from './produtos.entity';
+import { Produtos } from './produtos.entity';
 import { BaseEntity } from './base.entity';
 
 @Entity('itens_orcamento')
@@ -24,7 +24,7 @@ export class ItensOrcamento extends BaseEntity {
   @JoinColumn({ name: 'id_orcamento' })
   orcamento: Orcamento;
 
-  @ManyToOne(() => Produto)
+  @ManyToOne(() => Produtos)
   @JoinColumn({ name: 'id_produto' })
-  produto: Produto;
+  produto: Produtos;
 }
