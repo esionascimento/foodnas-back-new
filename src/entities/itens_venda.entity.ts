@@ -1,6 +1,13 @@
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Venda } from './vendas.entity';
-import { Lote } from './lote.entity';
+import { Lotes } from './lote.entity';
 
 @Entity()
 export class VendaItem extends BaseEntity {
@@ -9,15 +16,15 @@ export class VendaItem extends BaseEntity {
 
   @Column({ type: 'integer' })
   quantidade: number;
-  
+
   @Column({ name: 'valor_unitario', type: 'decimal', precision: 10, scale: 2 })
   valorUnitario: number;
-  
+
   @ManyToOne(() => Venda, (venda) => venda.itens)
   @JoinColumn({ name: 'id_venda' })
   venda: Venda;
-  
-  @ManyToOne(() => Lote)
+
+  @ManyToOne(() => Lotes)
   @JoinColumn({ name: 'id_lote' })
-  lote: Lote;
+  lote: Lotes;
 }
