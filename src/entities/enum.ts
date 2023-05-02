@@ -5,3 +5,11 @@ export enum EStatus {
 }
 
 export type TStatusRoleType = 'pendente' | 'concluida' | 'cancelada';
+
+export enum EPermission {
+  ADMIN = 'admin',
+  COLABORADOR = 'colaborador',
+  GERENCIA = 'gerencia',
+}
+
+export type TPermissionType = 'admin' | 'colaborador' | 'gerencia';
