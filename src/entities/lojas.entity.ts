@@ -1,4 +1,4 @@
-import { Field, ID } from '@nestjs/graphql';
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { BaseEntity } from './base.entity';
 import {
   Column,
@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { Usuarios } from './usuarios.entity';
 
+@ObjectType()
 @Entity()
 export class Lojas extends BaseEntity {
   @Field(() => ID)
@@ -24,12 +25,17 @@ export class Lojas extends BaseEntity {
   @Column('varchar', { length: 100 })
   endereco: string;
 
-  @ManyToOne(() => Usuarios, (usuario) => usuario.loja, {
-    nullable: false,
-  })
-  @JoinColumn({ name: 'id_usuario' })
-  usuario: Usuarios;
+  // @Field(() => Int)
+  // @Column({ name: 'id_usuario' })
+  // usuarioId: number;
 
-  // @OneToMany(() => Usuarios, (lote) => lote.loja)
-  // usuario: Usuarios[];
+  // @Field(() => Usuarios)
+  // @ManyToOne(() => Usuarios, (usuario) => usuario.id, {
+  //   nullable: false,
+  // })
+  // @JoinColumn({ name: 'id_usuario', referencedColumnName: 'id' })
+  // usuario: Usuarios;
+
+  @OneToMany(() => Usuarios, (lote) => lote.loja)
+  usuario: Usuarios[];
 }
