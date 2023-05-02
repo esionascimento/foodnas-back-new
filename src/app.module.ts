@@ -8,6 +8,7 @@ import { ApolloDriver } from '@nestjs/apollo/dist/drivers';
 import { UserResolver } from '@graphql/resolver/user.resolver';
 import { dataSourceOptions } from './database/ormconfig';
 import { AuthModule } from './modules/auth/auth.module';
+import { FornecedoresModule } from './modules/fornecedores/fornecedores.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { AuthModule } from './modules/auth/auth.module';
     TypeOrmModule.forRoot(dataSourceOptions),
     AuthModule,
     UsuariosModule,
+    FornecedoresModule,
   ],
   controllers: [],
   providers: [UserResolver],
