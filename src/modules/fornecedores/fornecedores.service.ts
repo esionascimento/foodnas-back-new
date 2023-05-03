@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Fornecedores } from '@/entities/fornecedores.entity';
 import { Repository } from 'typeorm';
 import { CreateOneFornecedoresInput } from './dto/inputs/create-fornecedores.input';
+import { TPayload } from '@/types';
 
 @Injectable()
 export class FornecedoresService {
@@ -11,11 +12,20 @@ export class FornecedoresService {
     private readonly fornecedoresRepository: Repository<Fornecedores>,
   ) {}
 
-  async create(input: CreateOneFornecedoresInput): Promise<Fornecedores> {
-    const user = this.fornecedoresRepository.create(input);
-    const aux = await this.fornecedoresRepository.save(user);
+  async create(
+    input: CreateOneFornecedoresInput,
+    user: TPayload,
+  ): Promise<Fornecedores> {
+    const neww = new Fornecedores();
+    neww.atualizadoEm = null;
+    neww.criadoEm = new Date();
+    neww.endereco = input?.endereco;
+    neww.nome = input?.nome;
+    neww.usuarioId = user.userId;
+
+    const aux = await this.fornecedoresRepository.save(neww);
     if (!aux) {
-      throw new Error('Falha na criação');
+      throw new BadRequestException('Falha na criação');
     }
     return aux;
   }
