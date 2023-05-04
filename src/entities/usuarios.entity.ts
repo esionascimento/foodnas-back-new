@@ -2,6 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToMany,
   ManyToOne,
   OneToMany,
@@ -20,6 +21,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { EPermission, TPermissionType } from './enum';
 import { Lojas } from './lojas.entity';
 import { Permissoes } from './permissoes.entity';
+import { Roles } from './roles.entity';
 
 @ObjectType()
 @Entity()
@@ -39,15 +41,26 @@ export class Usuarios extends BaseEntity {
   @Column('varchar', { length: 255 })
   senha: string;
 
-  @Column({ type: 'enum', enum: EPermission })
-  roles: TPermissionType;
+  // @Column({ type: 'enum', enum: EPermission })
+  // roles: TPermissionType;
+
+  @ManyToMany(() => Roles)
+  @JoinTable({
+    name: 'usuarios_roles',
+    joinColumns: [{ name: 'id_usuario' }],
+    inverseJoinColumns: [{ name: 'id_role' }],
+  })
+  roles: Roles[];
+
+  @Column('integer', { name: 'id_loja' })
+  lojaId: number;
 
   @ManyToOne(() => Lojas, (loja) => loja.usuario)
   @JoinColumn({ name: 'id_loja', referencedColumnName: 'id' })
   loja: Lojas;
 
-  @ManyToMany(() => Permissoes, (permissoes) => permissoes.usuarios)
-  permissoes: Permissoes[];
+  // @ManyToMany(() => Permissoes, (permissoes) => permissoes.usuarios)
+  // permissoes: Permissoes[];
 
   @OneToMany(() => Produtos, (produto) => produto.usuario)
   produtos: Produtos[];

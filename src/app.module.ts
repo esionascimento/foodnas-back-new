@@ -9,6 +9,11 @@ import { UserResolver } from '@graphql/resolver/user.resolver';
 import { dataSourceOptions } from './database/ormconfig';
 import { AuthModule } from './modules/auth/auth.module';
 import { FornecedoresModule } from './modules/fornecedores/fornecedores.module';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
+import { PermissaoModule } from './modules/permissao/permissao.module';
+import { RolesModule } from './modules/roles/roles.module';
+import { GqlAuthGuard } from './modules/auth/gql-auth.guard';
 
 @Module({
   imports: [
@@ -23,8 +28,16 @@ import { FornecedoresModule } from './modules/fornecedores/fornecedores.module';
     AuthModule,
     UsuariosModule,
     FornecedoresModule,
+    PermissaoModule,
+    RolesModule,
   ],
   controllers: [],
-  providers: [UserResolver],
+  // providers: [UserResolver],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule {}
