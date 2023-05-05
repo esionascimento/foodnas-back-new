@@ -8,6 +8,9 @@ class CUsuarios {
 
   @Field()
   nome: string;
+
+  @Field()
+  email: string;
 }
 
 @ObjectType()
