@@ -1,17 +1,22 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Usuarios } from './usuarios.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from './base.entity';
+import { Field, ObjectType } from '@nestjs/graphql';
 
+@ObjectType()
 @Entity()
-export class Permissoes {
+export class Permissoes extends BaseEntity {
+  @Field()
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field()
   @Column()
   nome: string;
 
+  @Field()
   @Column()
   descricao: string;
 
-  @ManyToMany(() => Usuarios, (user) => user.permissoes)
-  usuarios: Usuarios[];
+  // @ManyToMany(() => Usuarios, (user) => user.permissoes)
+  // usuarios: Usuarios[];
 }
