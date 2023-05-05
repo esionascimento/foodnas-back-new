@@ -8,6 +8,8 @@ import {
 import { Usuarios } from '@/entities/usuarios.entity';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { Roles } from '../auth/roles.decorator';
+import { RolesGuard } from '../auth/roles.guard';
 
 @Resolver(() => Usuarios)
 export class UsuariosResolver {
@@ -35,7 +37,8 @@ export class UsuariosResolver {
   }
 
   @Query(() => [Usuarios])
-  @UseGuards(JwtAuthGuard)
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
   findAll(@Context() context) {
     return this.usuariosService.findAll(context.req.user);
   }
@@ -43,5 +46,26 @@ export class UsuariosResolver {
   @Query(() => Usuarios, { name: 'nome' })
   findOne(@Args('nome', { type: () => String }) nome: string) {
     return this.usuariosService.findOne({ where: { nome } });
+  }
+
+  @Mutation(() => CreateUsuariosResponse)
+  async updateUsuarios(
+    @Args('input') input: CreateUsuariosInput,
+  ): Promise<CreateUsuariosResponse> {
+    const aux = await this.usuariosService.create(input);
+    return aux;
+  }
+
+  @Mutation(() => CreateUsuariosResponse)
+  @UseGuards(JwtAuthGuard)
+  async updateUsuariosInterno(
+    @Args('input') input: CreateUsuariosInputInterno,
+    @Context() context,
+  ): Promise<CreateUsuariosResponse> {
+    const aux = await this.usuariosService.createInterno(
+      input,
+      context.req.user,
+    );
+    return aux;
   }
 }
