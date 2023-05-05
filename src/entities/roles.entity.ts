@@ -7,17 +7,20 @@ import {
 } from 'typeorm';
 import { Permissoes } from './permissoes.entity';
 import { BaseEntity } from './base.entity';
-import { ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 @Entity()
 export class Roles extends BaseEntity {
+  @Field()
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Field()
   @Column()
   nome: string;
 
+  @Field()
   @Column()
   descricao: string;
 
