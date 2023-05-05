@@ -4,7 +4,6 @@ import { LoginResponse } from './dto/login-response';
 import { LoginUsuarioInput } from './dto/login-user.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from './gql-auth.guard';
-import { PublicGuard } from './public-auth.guard';
 
 @Resolver()
 export class AuthResolver {
