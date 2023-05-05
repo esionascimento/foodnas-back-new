@@ -10,8 +10,10 @@ import { Lotes } from './lote.entity';
 import { MeiosPagamento } from './meios_pagamentos.entity';
 import { MovimentacoesEstoque } from './movimentacoes_estoque.entity';
 import { Orcamento } from './orcamentos.entity';
+import { Permissoes } from './permissoes.entity';
 import { Preco } from './precos.entity';
 import { Produtos } from './produtos.entity';
+import { Roles } from './roles.entity';
 import { Usuarios } from './usuarios.entity';
 import { Venda } from './vendas.entity';
 import { VendasMeioPagamento } from './vendas_meios_pagamentos.entity';
@@ -34,6 +36,8 @@ const entities = [
   VendasMeioPagamento,
   Venda,
   Lojas,
+  Permissoes,
+  Roles,
 ];
 
 export default entities;
