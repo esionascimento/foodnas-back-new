@@ -10,11 +10,12 @@ import {
 } from './dto/inputs/create-usuarios.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Usuarios } from '@/entities/usuarios.entity';
-import { FindOneOptions, Repository } from 'typeorm';
+import { FindOneOptions, In, Repository } from 'typeorm';
 import { PartialType } from '@nestjs/graphql';
 import * as bcrypt from 'bcrypt';
 import { Lojas } from '@/entities/lojas.entity';
 import { TPayload } from '@/types';
+import { Roles } from '@/entities/roles.entity';
 
 export class FindCargaObjetoDTO extends PartialType(Usuarios) {}
 
@@ -25,6 +26,8 @@ export class UsuariosService {
     private readonly usuariosRepository: Repository<Usuarios>,
     @InjectRepository(Lojas)
     private readonly lojasRepository: Repository<Lojas>,
+    @InjectRepository(Roles)
+    private readonly rolesRepository: Repository<Roles>,
   ) {}
 
   async create(input: CreateUsuariosInput): Promise<CreateUsuariosResponse> {
@@ -68,6 +71,13 @@ export class UsuariosService {
     if (isOnlyEmail)
       throw new ConflictException('Email já cadastrado na base de dados!');
 
+    const existRole = await this.rolesRepository.findBy({
+      id: In(input.roles),
+    });
+
+    if (!existRole)
+      throw new BadRequestException('Não foi encontrado nenhum role');
+
     const responseUser = await this.usuariosRepository.findOne({
       where: { id: user.userId },
       relations: ['loja'],
@@ -80,6 +90,7 @@ export class UsuariosService {
     newUsuario.nome = input?.nome;
     newUsuario.email = input?.email;
     newUsuario.lojaId = responseUser.loja.id;
+    newUsuario.roles = existRole;
 
     const password = await bcrypt.hash(input.senha, 11);
     const responseUsuario = await this.usuariosRepository.save({

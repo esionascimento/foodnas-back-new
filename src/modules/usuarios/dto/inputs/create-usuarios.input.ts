@@ -62,4 +62,7 @@ export class CreateUsuariosInputInterno {
   @MinLength(8)
   @MaxLength(255)
   senha: string;
+
+  @Field(() => [String])
+  roles: string[];
 }
