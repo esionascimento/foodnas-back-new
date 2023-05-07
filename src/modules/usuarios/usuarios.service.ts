@@ -147,17 +147,14 @@ export class UsuariosService {
     if (!responseUser) throw new BadRequestException('Loja não encontrado!');
 
     const newUsuario = new Usuarios();
+    newUsuario.id = input.id;
     newUsuario.atualizadoEm = null;
     newUsuario.nome = input?.nome;
     newUsuario.email = input?.email;
     newUsuario.lojaId = responseUser.loja.id;
     newUsuario.roles = existRole;
 
-    const password = await bcrypt.hash(input.senha, 11);
-    const responseUsuario = await this.usuariosRepository.save({
-      ...newUsuario,
-      senha: password,
-    });
+    const responseUsuario = await this.usuariosRepository.save(newUsuario);
 
     return responseUsuario;
   }
