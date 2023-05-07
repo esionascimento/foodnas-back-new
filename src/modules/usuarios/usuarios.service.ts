@@ -16,6 +16,7 @@ import * as bcrypt from 'bcrypt';
 import { Lojas } from '@/entities/lojas.entity';
 import { TPayload } from '@/types';
 import { Roles } from '@/entities/roles.entity';
+import { UpdateUsuariosInputInterno } from './dto/inputs/update-usuarios.input';
 
 export class FindCargaObjetoDTO extends PartialType(Usuarios) {}
 
@@ -110,5 +111,55 @@ export class UsuariosService {
 
   async findOne(options: FindOneOptions<Usuarios>) {
     return this.usuariosRepository.findOne(options);
+  }
+
+  async updateInterno(
+    input: UpdateUsuariosInputInterno,
+    user: TPayload,
+  ): Promise<CreateUsuariosResponse> {
+    const isOnlyUsuario = await this.findOne({
+      where: { id: input.id },
+    });
+
+    if (!isOnlyUsuario)
+      throw new BadRequestException('Usuário não encontrado!');
+
+    return;
+
+    const isOnlyEmail = await this.findOne({
+      where: { email: input.email },
+    });
+
+    if (isOnlyEmail)
+      throw new ConflictException('Email já cadastrado na base de dados!');
+
+    const existRole = await this.rolesRepository.findBy({
+      id: In(input.roles),
+    });
+
+    if (!existRole)
+      throw new BadRequestException('Não foi encontrado nenhum role');
+
+    const responseUser = await this.usuariosRepository.findOne({
+      where: { id: user.userId },
+      relations: ['loja'],
+    });
+
+    if (!responseUser) throw new BadRequestException('Loja não encontrado!');
+
+    const newUsuario = new Usuarios();
+    newUsuario.atualizadoEm = null;
+    newUsuario.nome = input?.nome;
+    newUsuario.email = input?.email;
+    newUsuario.lojaId = responseUser.loja.id;
+    newUsuario.roles = existRole;
+
+    const password = await bcrypt.hash(input.senha, 11);
+    const responseUsuario = await this.usuariosRepository.save({
+      ...newUsuario,
+      senha: password,
+    });
+
+    return responseUsuario;
   }
 }

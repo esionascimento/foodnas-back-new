@@ -10,6 +10,7 @@ import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Roles } from '../auth/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
+import { UpdateUsuariosInputInterno } from './dto/inputs/update-usuarios.input';
 
 @Resolver(() => Usuarios)
 export class UsuariosResolver {
@@ -58,11 +59,11 @@ export class UsuariosResolver {
 
   @Mutation(() => CreateUsuariosResponse)
   @UseGuards(JwtAuthGuard)
-  async updateUsuariosInterno(
-    @Args('input') input: CreateUsuariosInputInterno,
+  async UpdateUsuariosInterno(
+    @Args('input') input: UpdateUsuariosInputInterno,
     @Context() context,
   ): Promise<CreateUsuariosResponse> {
-    const aux = await this.usuariosService.createInterno(
+    const aux = await this.usuariosService.updateInterno(
       input,
       context.req.user,
     );
