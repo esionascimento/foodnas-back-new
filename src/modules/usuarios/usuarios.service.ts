@@ -113,6 +113,53 @@ export class UsuariosService {
     return this.usuariosRepository.findOne(options);
   }
 
+  async update(
+    input: UpdateUsuariosInputInterno,
+    user: TPayload,
+  ): Promise<CreateUsuariosResponse> {
+    const isOnlyUsuario = await this.findOne({
+      where: { id: input.id },
+    });
+
+    if (!isOnlyUsuario)
+      throw new BadRequestException('Usuário não encontrado!');
+
+    const isOnlyEmail = await this.findOne({
+      where: { email: input.email },
+    });
+
+    if (isOnlyEmail && input.id !== isOnlyEmail.id) {
+      throw new ConflictException('Email já cadastrado na base de dados!');
+    }
+
+    const existRole = await this.rolesRepository.findBy({
+      id: In(input.roles),
+    });
+
+    if (!existRole)
+      throw new BadRequestException('Não foi encontrado nenhum role');
+
+    const responseUser = await this.usuariosRepository.findOne({
+      where: { id: user.userId },
+      relations: ['loja'],
+    });
+
+    if (!responseUser) throw new BadRequestException('Loja não encontrado!');
+
+    const newUsuario = new Usuarios();
+    newUsuario.id = input.id;
+    newUsuario.atualizadoEm = null;
+    newUsuario.nome = input?.nome;
+    newUsuario.email = input?.email;
+    newUsuario.lojaId = responseUser.loja.id;
+    // Este usuário sempre será ADMIN
+    newUsuario.roles = existRole;
+
+    const responseUsuario = await this.usuariosRepository.save(newUsuario);
+
+    return responseUsuario;
+  }
+
   async updateInterno(
     input: UpdateUsuariosInputInterno,
     user: TPayload,
@@ -152,7 +199,7 @@ export class UsuariosService {
     newUsuario.nome = input?.nome;
     newUsuario.email = input?.email;
     newUsuario.lojaId = responseUser.loja.id;
-    newUsuario.roles = existRole;
+    // newUsuario.roles = existRole;
 
     const responseUsuario = await this.usuariosRepository.save(newUsuario);
 
