@@ -17,11 +17,6 @@ export class UpdateUsuariosInputInterno {
   @MaxLength(255)
   email: string;
 
-  @Field()
-  @MinLength(8)
-  @MaxLength(255)
-  senha: string;
-
   @Field(() => [String])
   roles: string[];
 }
