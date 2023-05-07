@@ -124,14 +124,13 @@ export class UsuariosService {
     if (!isOnlyUsuario)
       throw new BadRequestException('Usuário não encontrado!');
 
-    return;
-
     const isOnlyEmail = await this.findOne({
       where: { email: input.email },
     });
 
-    if (isOnlyEmail)
+    if (isOnlyEmail && input.id !== isOnlyEmail.id) {
       throw new ConflictException('Email já cadastrado na base de dados!');
+    }
 
     const existRole = await this.rolesRepository.findBy({
       id: In(input.roles),
