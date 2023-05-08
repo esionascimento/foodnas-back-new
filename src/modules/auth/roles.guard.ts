@@ -33,9 +33,18 @@ export class RolesGuard implements CanActivate {
     if (!usuarioJwt) throw new BadRequestException('Usuário não encontrado');
 
     const userRoles = usuarioJwt?.roles?.map((role) => role.nome);
+
     if (!userRoles?.length)
       throw new BadRequestException('Usuário não tem permissão');
+    const resPermission = requiredRoles.some((role) =>
+      userRoles?.includes(role),
+    );
 
-    return requiredRoles.some((role) => userRoles?.includes(role));
+    if (!resPermission)
+      throw new BadRequestException(
+        'Usuário não tem permissão para está operação',
+      );
+
+    return resPermission;
   }
 }
