@@ -16,7 +16,10 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
   canActivate(context: ExecutionContext) {
     const ctx = GqlExecutionContext.create(context);
-    if (ctx.getHandler().name === 'login') {
+    if (
+      ctx.getHandler().name === 'login' ||
+      ctx.getHandler().name === 'createUsuarios'
+    ) {
       return true;
     }
 
