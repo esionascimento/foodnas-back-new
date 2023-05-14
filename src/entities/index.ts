@@ -1,4 +1,5 @@
 import { BaseEntity } from './base.entity';
+import { Caracteristicas } from './caracteristicas.entity';
 import { Compras } from './compras.entity';
 import { Estoque } from './estoque.entity';
 import { Fornecedores } from './fornecedores.entity';
@@ -14,6 +15,7 @@ import { Permissoes } from './permissoes.entity';
 import { Preco } from './precos.entity';
 import { Produtos } from './produtos.entity';
 import { Roles } from './roles.entity';
+import { Tipos } from './tipos.entity';
 import { Usuarios } from './usuarios.entity';
 import { Venda } from './vendas.entity';
 import { VendasMeioPagamento } from './vendas_meios_pagamentos.entity';
@@ -38,6 +40,8 @@ const entities = [
   Lojas,
   Permissoes,
   Roles,
+  Tipos,
+  Caracteristicas,
 ];
 
 export default entities;
