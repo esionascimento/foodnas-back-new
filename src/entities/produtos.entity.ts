@@ -10,20 +10,29 @@ import { Usuarios } from './usuarios.entity';
 import { Fornecedores } from './fornecedores.entity';
 import { Lotes } from './lote.entity';
 import { BaseEntity } from './base.entity';
+import { Field, ObjectType } from '@nestjs/graphql';
 
+@ObjectType()
 @Entity()
 export class Produtos extends BaseEntity {
+  @Field()
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field()
   @Column('varchar', { length: 50 })
   nome: string;
 
+  @Field()
   @Column({ type: 'text', nullable: true })
   descricao: string;
 
+  @Field()
   @Column('varchar', { length: 20 })
   unidade: string;
+
+  @Column()
+  tipo: string;
 
   @ManyToOne(() => Fornecedores, (fornecedores) => fornecedores.produtos)
   fornecedores: Fornecedores;
