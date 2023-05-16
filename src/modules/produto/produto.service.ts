@@ -1,38 +1,51 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOneOptions, Repository } from 'typeorm';
-import { CreateOneProdutoInput } from './dto/inputs/create-produto.input';
+import {
+  CreateOneProdutoInput,
+  ProdutoInput,
+} from './dto/inputs/create-produto.input';
 import { TPayload } from '@/types';
 import { Produtos } from '@/entities/produtos.entity';
+import { Caracteristicas } from '@/entities/caracteristicas.entity';
+import { Tipos } from '@/entities/tipos.entity';
 
 @Injectable()
 export class ProdutoService {
   constructor(
     @InjectRepository(Produtos)
-    private readonly permissoesRepository: Repository<Produtos>,
+    private readonly produtosRepository: Repository<Produtos>,
+    @InjectRepository(Caracteristicas)
+    private readonly caracteristicasRepository: Repository<Caracteristicas>,
+    @InjectRepository(Tipos)
+    private readonly tiposRepository: Repository<Tipos>,
   ) {}
 
-  async create(
-    input: CreateOneProdutoInput,
-    user: TPayload,
-  ): Promise<Produtos> {
-    const existPermissao = await this.findOne({ where: { nome: input.nome } });
+  async create(input: ProdutoInput, user: TPayload): Promise<Produtos> {
+    // Criar o objeto Produto
+    const produto = new Produtos();
+    produto.nome = input.nome;
 
-    if (existPermissao) throw new BadRequestException('Permissão já existe!');
-    return;
-    // const newPermissao = new Produtos();
+    // Obter o tipo de produto do banco de dados usando o tipoId
+    const tipo = await this.tiposRepository.findOne({
+      where: { id: input.tipoId },
+    });
+    produto.tipo = tipo;
 
-    // const resProduto = await this.permissoesRepository.save(
-    //   newPermissao,
-    // );
+    // Criar as características do produto
+    const caracteristicas = input.caracteristicas.map((caracteristicaInput) => {
+      const caracteristica = new Caracteristicas();
+      caracteristica.nome = caracteristicaInput.nome;
+      caracteristica.valor = caracteristicaInput.valor;
+      return caracteristica;
+    });
 
-    // if (!resProduto) {
-    //   throw new BadRequestException('Falha criar permissão');
-    // }
-    // return resProduto;
-  }
+    // Salvar as características no banco de dados
+    produto.caracteristicas = await this.caracteristicasRepository.save(
+      caracteristicas,
+    );
 
-  async findOne(options: FindOneOptions<Produtos>) {
-    return this.permissoesRepository.findOne(options);
+    // Salvar o objeto Produto no banco de dados
+    return await this.produtosRepository.save(produto);
   }
 }
