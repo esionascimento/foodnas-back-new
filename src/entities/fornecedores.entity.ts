@@ -15,7 +15,7 @@ import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 @Entity()
 export class Fornecedores extends BaseEntity {
   @Field(() => ID)
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Field()
