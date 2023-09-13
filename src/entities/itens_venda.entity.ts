@@ -11,7 +11,7 @@ import { Lotes } from './lote.entity';
 
 @Entity()
 export class VendaItem extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column({ type: 'integer' })
