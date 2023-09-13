@@ -12,7 +12,7 @@ import { BaseEntity } from './base.entity';
 
 @Entity()
 export class Compras extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column('datetime', { name: 'data_compra' })
