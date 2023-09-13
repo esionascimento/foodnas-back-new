@@ -30,7 +30,7 @@ export class UsuariosResolver {
     @Args('input') input: CreateUsuariosInputInterno,
     @Context() context,
   ): Promise<CreateUsuariosResponse> {
-    const aux = await this.usuariosService.createInterno(
+    const aux = await this.usuariosService.createCollaborator(
       input,
       context.req.user,
     );
@@ -63,7 +63,7 @@ export class UsuariosResolver {
     @Args('input') input: UpdateUsuariosInputInterno,
     @Context() context,
   ): Promise<CreateUsuariosResponse> {
-    const aux = await this.usuariosService.updateInterno(
+    const aux = await this.usuariosService.updateCollaborator(
       input,
       context.req.user,
     );
