@@ -61,7 +61,7 @@ export class UsuariosService {
     return responseUsuario;
   }
 
-  async createInterno(
+  async createCollaborator(
     input: CreateUsuariosInputInterno,
     user: TPayload,
   ): Promise<CreateUsuariosResponse> {
@@ -160,7 +160,7 @@ export class UsuariosService {
     return responseUsuario;
   }
 
-  async updateInterno(
+  async updateCollaborator(
     input: UpdateUsuariosInputInterno,
     user: TPayload,
   ): Promise<CreateUsuariosResponse> {
