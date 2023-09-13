@@ -28,11 +28,18 @@ export class RolesGuard implements CanActivate {
     }
     const ctx = GqlExecutionContext.create(context);
 
-    const usuarioJwt = ctx.getContext().req.user;
+    const usuarioJwt = ctx.getContext<any>().req.user;
 
     if (!usuarioJwt) throw new BadRequestException('Usuário não encontrado');
 
-    const userRoles = usuarioJwt?.roles?.map((role) => role.nome);
+    const user = await this.usuariosRepository.findOne({
+      where: {
+        id: usuarioJwt.id,
+      },
+      relations: ['roles'],
+    });
+
+    const userRoles = user?.roles?.map((role) => role.nome);
 
     if (!userRoles?.length)
       throw new BadRequestException('Usuário não tem permissão');
