@@ -11,7 +11,7 @@ import { BaseEntity } from './base.entity';
 
 @Entity('itens_orcamento')
 export class ItensOrcamento extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column()
