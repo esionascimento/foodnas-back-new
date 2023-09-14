@@ -6,7 +6,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 @Entity()
 export class Permissoes extends BaseEntity {
   @Field()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Field()
