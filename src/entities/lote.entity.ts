@@ -15,7 +15,7 @@ import { ItensCompra } from './itens_compra.entity';
 
 @Entity()
 export class Lotes extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column('varchar', { name: 'numero_lote', length: 20 })
