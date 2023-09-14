@@ -3,7 +3,7 @@ import { Produtos } from './produtos.entity';
 
 @Entity()
 export class Tipos {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column()
