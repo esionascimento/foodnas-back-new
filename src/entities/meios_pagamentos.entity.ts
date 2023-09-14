@@ -4,7 +4,7 @@ import { BaseEntity } from './base.entity';
 
 @Entity()
 export class MeiosPagamento extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column({ type: 'varchar', length: 100 })
