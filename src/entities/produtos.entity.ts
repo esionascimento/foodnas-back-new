@@ -18,7 +18,7 @@ import { Tipos } from './tipos.entity';
 @Entity()
 export class Produtos extends BaseEntity {
   @Field()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Field()
