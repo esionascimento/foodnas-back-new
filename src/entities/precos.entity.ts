@@ -13,7 +13,7 @@ import { Usuarios } from './usuarios.entity';
 
 @Entity()
 export class Preco extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column({ name: 'data_semana' })
