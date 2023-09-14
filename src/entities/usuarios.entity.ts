@@ -27,7 +27,7 @@ import { Roles } from './roles.entity';
 @Entity()
 export class Usuarios extends BaseEntity {
   @Field()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Field()
