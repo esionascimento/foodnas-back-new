@@ -1,20 +1,13 @@
-import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { BaseEntity } from './base.entity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Usuarios } from './usuarios.entity';
 
 @ObjectType()
 @Entity()
 export class Lojas extends BaseEntity {
   @Field(() => ID)
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Field()
@@ -24,6 +17,18 @@ export class Lojas extends BaseEntity {
   @Field()
   @Column('varchar', { length: 100 })
   endereco: string;
+
+  @Field()
+  @Column({ unique: true, length: 14 })
+  cnpj: string;
+
+  @Field()
+  @Column()
+  celular: string;
+
+  @Field()
+  @Column()
+  telefone: string;
 
   // @Field(() => Int)
   // @Column({ name: 'id_usuario' })
