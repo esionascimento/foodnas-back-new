@@ -11,7 +11,7 @@ import { EStatus, TStatusRoleType } from './enum';
 
 @Entity()
 export class Orcamento extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column({ type: 'enum', enum: EStatus })
