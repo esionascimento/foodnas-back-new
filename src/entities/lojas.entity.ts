@@ -15,19 +15,27 @@ export class Lojas extends BaseEntity {
   nome: string;
 
   @Field()
+  @Column({ unique: true, length: 14 })
+  cnpj: string;
+
+  @Field()
   @Column('varchar', { length: 100 })
   endereco: string;
 
   @Field()
-  @Column({ unique: true, length: 14 })
-  cnpj: string;
+  @Column('varchar', { length: 10, nullable: true })
+  numero: number;
+
+  @Field()
+  @Column('varchar', { length: 100, nullable: true })
+  complemento: string;
 
   @Field()
   @Column()
   celular: string;
 
   @Field()
-  @Column()
+  @Column({ nullable: true })
   telefone: string;
 
   // @Field(() => Int)
