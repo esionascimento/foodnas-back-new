@@ -16,7 +16,7 @@ import { MeiosPagamento } from './meios_pagamentos.entity';
 
 @Entity()
 export class Venda extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column('datetime', { name: 'data_venda' })
