@@ -4,7 +4,7 @@ import { Permissoes } from './permissoes.entity';
 
 @Entity()
 export class UsuariosPermissoes {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   // @ManyToOne(() => Usuarios, (user) => user.permissoes, { onDelete: 'CASCADE' })
