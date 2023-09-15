@@ -12,7 +12,7 @@ import { Lotes } from './lote.entity';
 import { BaseEntity } from './base.entity';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Caracteristicas } from './caracteristicas.entity';
-import { Tipos } from './tipos.entity';
+import { Categorias } from './categorias.entity';
 
 @ObjectType()
 @Entity()
@@ -33,8 +33,8 @@ export class Produtos extends BaseEntity {
   @Column('varchar', { length: 20 })
   unidade: string;
 
-  @ManyToOne(() => Tipos, (tipos) => tipos.produtos)
-  tipo: Tipos;
+  @ManyToOne(() => Categorias, (tipos) => tipos.produtos)
+  tipo: Categorias;
 
   @ManyToOne(() => Fornecedores, (fornecedores) => fornecedores.produtos)
   fornecedores: Fornecedores;
