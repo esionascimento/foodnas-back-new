@@ -15,7 +15,7 @@ import { Permissoes } from './permissoes.entity';
 import { Preco } from './precos.entity';
 import { Produtos } from './produtos.entity';
 import { Roles } from './roles.entity';
-import { Tipos } from './tipos.entity';
+import { Categorias } from './categorias.entity';
 import { Usuarios } from './usuarios.entity';
 import { Venda } from './vendas.entity';
 import { VendasMeioPagamento } from './vendas_meios_pagamentos.entity';
@@ -40,7 +40,7 @@ const entities = [
   Lojas,
   Permissoes,
   Roles,
-  Tipos,
+  Categorias,
   Caracteristicas,
 ];
 
