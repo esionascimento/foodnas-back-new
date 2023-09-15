@@ -23,6 +23,11 @@ import { Lojas } from './lojas.entity';
 import { Permissoes } from './permissoes.entity';
 import { Roles } from './roles.entity';
 
+enum Boolean {
+  False = 0,
+  True = 1,
+}
+
 @ObjectType()
 @Entity()
 export class Usuarios extends BaseEntity {
@@ -41,8 +46,22 @@ export class Usuarios extends BaseEntity {
   @Column('varchar', { length: 255 })
   senha: string;
 
+  @Column('enum', {
+    nullable: false,
+    default: Boolean.False,
+    enum: Boolean,
+  })
+  isActive: number;
+
   // @Column({ type: 'enum', enum: EPermission })
   // roles: TPermissionType;
+
+  @Column('enum', {
+    nullable: false,
+    default: Boolean.False,
+    enum: Boolean,
+  })
+  superUser: number;
 
   @ManyToMany(() => Roles)
   @JoinTable({
